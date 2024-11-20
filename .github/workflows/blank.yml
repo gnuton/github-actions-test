@@ -92,6 +92,10 @@ jobs:
       runs-on: ubuntu-latest
       if: startsWith(github.event.ref, 'refs/tags/')
       steps:
+        - name: Ensure permissions for artifact download
+          run: |
+            mkdir -p /__w/github-actions-test/github-actions-test
+            chmod -R 777 /__w/github-actions-test/github-actions-test
         - name: Download packages
           uses: actions/download-artifact@v4
         - name: Get release version
