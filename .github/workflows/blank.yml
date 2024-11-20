@@ -10,7 +10,6 @@ jobs:
         matrix:
           cfg:
             - { model: "gt-be98",          sdk: "src-rt-5.04behnd.4916",      ui: "default",  skip: false }
-            - { model: "gt-be98",          sdk: "src-rt-5.04behnd.4916",      ui: "rog",      skip: false }
       if: "!contains(github.event.commits[0].message, '[SKIP_CI]')"
       container:
         image: gnuton/asuswrt-merlin-toolchains-docker:latest
@@ -83,6 +82,7 @@ jobs:
           with:
             name: release-${{ matrix.cfg.model }}-${{ matrix.cfg.ui }}
             path: "/project/artifacts"
+          continue-on-error: true
         - name: Download packages
           uses: actions/download-artifact@v4
 
